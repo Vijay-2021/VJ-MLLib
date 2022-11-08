@@ -1,5 +1,10 @@
-#include "../includes/matrix.hpp"
+#include "matrix.hpp"
+#include <iostream>
 
 int main() {
-    return 0;
+    std::cout << "main works in docker file" << std::endl;
+    Matrix m(2,2);
+    m.setElement(4,1,1);
+    m.printMatrix();
+    //return 0;
 }
