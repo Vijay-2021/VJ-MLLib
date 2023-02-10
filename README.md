@@ -3,6 +3,19 @@
 # Project Objectives
  * Use [Keras](https://keras.io/api/) for reference
  * Use ~~strikethough~~ to cross off
+
+
+## Data Handling
+1. Train/Test Split
+2. CSV
+      * Read from CSV
+      * Write to CSV
+5. Model
+      * Write to file
+      * Read from file
+6. CSR/COO format
+
+
 ## Linalg Library
 1. Matrix/Tensor class
     * reshape
@@ -16,53 +29,12 @@
     * cross product (outer product)
     * matrix multiplication (elem-wise)
     * matrix multiplication (standard)
-
-
-
-## Loss functions (loss class)
-1. mean_squared_error
-    - loss function
-    - backprop
-2. mean_absolute_error
-    - loss function
-    - backprop
-3. mean_absolute_percentage_error
-    - loss function
-    - backprop
-4. mean_squared_logarithmic_error
-    - loss function
-    - backprop
-5. squared_hinge
-    - loss function
-    - backprop
-6. hinge
-    - loss function
-    - backprop
-7. categorical_hinge
-    - loss function
-    - backprop
-8. logcosh
-    - loss function
-    - backprop
-9. categorical_crossentropy
-    - loss function
-    - backprop
-10. sparse_categorical_crossentropy
-    - loss function
-    - backprop
-11. binary_crossentropy
-    - loss function
-    - backprop
-12. kullback_leibler_divergence
-    - loss function
-    - backprop
-13. poisson
-    - loss function
-    - backprop
-14. cosine_proximity
-    - loss function
-    - backprop
-
+3. Data Processing
+    * Max/Min/ArgMax/ArgMin
+    * Sum
+    * Axis functionality
+    * Drop/Add
+    * Where (for finding null, inf, 0)
 
 
 ## NN Model
@@ -112,4 +84,52 @@
 10. Lambda layer (arbitrary function on an activation layer)
  
 
- 
+
+## Loss functions (loss class)
+1. mean_squared_error
+    - loss function
+    - backprop
+2. mean_absolute_error
+    - loss function
+    - backprop
+3. mean_absolute_percentage_error
+    - loss function
+    - backprop
+4. mean_squared_logarithmic_error
+    - loss function
+    - backprop
+5. squared_hinge
+    - loss function
+    - backprop
+6. hinge
+    - loss function
+    - backprop
+7. categorical_hinge
+    - loss function
+    - backprop
+8. logcosh
+    - loss function
+    - backprop
+9. categorical_crossentropy
+    - loss function
+    - backprop
+10. sparse_categorical_crossentropy
+    - loss function
+    - backprop
+11. binary_crossentropy
+    - loss function
+    - backprop
+12. kullback_leibler_divergence
+    - loss function
+    - backprop
+13. poisson
+    - loss function
+    - backprop
+14. cosine_proximity
+    - loss function
+    - backprop
+
+
+
+ ## Test Cases
+* Catch
