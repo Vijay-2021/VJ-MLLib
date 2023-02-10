@@ -96,7 +96,7 @@
     - SGD
 
 
-## Layers
+## Layers (preconfigured node arrays)
 1. Abstract layer class
     - node array
     - in/out shape
