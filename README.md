@@ -5,12 +5,12 @@
   - https://keras.io/api/
 ## Linalg Library
 1. Matrix/Tensor class
- * reshape
- * broadcasting
- * matrix/tensor.zeros()
- * matrix/tensor.ones()
+  * reshape
+  * broadcasting
+  * matrix/tensor.zeros()
+  * matrix/tensor.ones()
 2. Operator overloads
- * scalar/vector addition/subtraction
+  * scalar/vector addition/subtraction
 * scalar multiplication/division
 * dot product (inner product)
 * cross product (outer product)
