@@ -10,106 +10,106 @@
     * matrix/tensor.zeros()
     * matrix/tensor.ones()
 2. Operator overloads
-  * scalar/vector addition/subtraction
-* scalar multiplication/division
-* dot product (inner product)
-* cross product (outer product)
-* matrix multiplication (elem-wise)
-* matrix multiplication (standard)
+    * scalar/vector addition/subtraction
+    * scalar multiplication/division
+    * dot product (inner product)
+    * cross product (outer product)
+    * matrix multiplication (elem-wise)
+    * matrix multiplication (standard)
 
 
 
 ## Loss functions (loss class)
-* mean_squared_error
- * loss function
- * backprop
-* mean_absolute_error
-    ** loss function
-    - backprop
- * mean_absolute_percentage_error
+1. mean_squared_error
     - loss function
     - backprop
- * mean_squared_logarithmic_error
+2. mean_absolute_error
     - loss function
     - backprop
- * squared_hinge
+3. mean_absolute_percentage_error
     - loss function
     - backprop
- * hinge
+4. mean_squared_logarithmic_error
     - loss function
     - backprop
- * categorical_hinge
+5. squared_hinge
     - loss function
     - backprop
- * logcosh
+6. hinge
     - loss function
     - backprop
- * categorical_crossentropy
+7. categorical_hinge
     - loss function
     - backprop
- * sparse_categorical_crossentropy
+8. logcosh
     - loss function
     - backprop
- * binary_crossentropy
+9. categorical_crossentropy
     - loss function
     - backprop
- * kullback_leibler_divergence
+10. sparse_categorical_crossentropy
     - loss function
     - backprop
- * poisson
+11. binary_crossentropy
     - loss function
     - backprop
- * cosine_proximity
-   - loss function
-   - backprop
+12. kullback_leibler_divergence
+    - loss function
+    - backprop
+13. poisson
+    - loss function
+    - backprop
+14. cosine_proximity
+    - loss function
+    - backprop
 
 
 
 ## NN Model
- * Layers (see section)
- * Model class
-   - Layers (vector)
-   - input/output shape
-   - loss function
-   - evaluate()
-   - train()
-    - forward prop
-    - back prop
-   - optimize()
-   - weights, biases
+1. Layers (see section)
+2. Model class
+    - Layers (vector)
+    - input/output shape
+    - loss function
+    - evaluate()
+    - train()
+        - forward prop
+        - back prop
+    - optimize()
+    - weights, biases
 
 
- * Node Class
-   - abstract node
-   - transform (function)
-   - backprop(loss funct)
-   - type:
-    - sigmoid
-    - relu
+3. Node Class
+    - abstract node
+    - transform (function)
+    - backprop(loss funct)
+    - type:
+        - sigmoid
+        - relu
     - softmax
     - gradient
     - standard (no function applied)
     - lambda
- * Optimizers (static class)
-   - Adam
-   - RMSprop
-   - SGD
+4. Optimizers (static class)
+    - Adam
+    - RMSprop
+    - SGD
 
 
 ## Layers
- * Abstract layer class
-   - node array
-   - in/out shape
-   - connection
- * input layer
- * Activation layer
- * Conv2D layer
- * Dense layer
- * (Global)MaxPooling
- * (Global)AveragePooling
- * Dropout
- * Normalization
- * Lambda layer (arbitrary function on an activation layer)
+1. Abstract layer class
+    - node array
+    - in/out shape
+    - connection
+2. input layer
+3. Activation layer
+4. Conv2D layer
+5. Dense layer
+6. (Global)MaxPooling
+7. (Global)AveragePooling
+8. Dropout
+9. Normalization
+10. Lambda layer (arbitrary function on an activation layer)
  
 
  
