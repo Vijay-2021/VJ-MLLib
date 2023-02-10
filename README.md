@@ -1,7 +1,7 @@
 # VJ-MLLib
  * Vijay Shah, Jacob Stolker
 # Project Objectives
- * Use [Keras](https://keras.io/api/) for reference
+ * Use [Keras](https://keras.io/api/){:target="_blank"} for reference
 ## Linalg Library
 1. Matrix/Tensor class
     * reshape
