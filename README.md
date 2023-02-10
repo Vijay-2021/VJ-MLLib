@@ -1,6 +1,6 @@
 # VJ-MLLib
-
-# Objectives
+ * Vijay Shah, Jacob Stolker
+# Project Objectives
 
 ## Linalg Library
  * Tensor class
