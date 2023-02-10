@@ -17,6 +17,7 @@
    - gradient
    
 
+
 ## Loss functions (loss class)
  * mean_squared_error
    - loss function
@@ -60,6 +61,9 @@
  * cosine_proximity
    - loss function
    - backprop
+
+
+
 ## NN Model
  * Layers (see section)
  * Model class
@@ -69,6 +73,8 @@
    - evaluate()
    - train()
    - weights, biases
+
+
 
 ## Layers
  * Abstract layer class
