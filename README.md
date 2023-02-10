@@ -29,7 +29,7 @@
     * cross product (outer product)
     * matrix multiplication (elem-wise)
     * matrix multiplication (standard)
-3. Data Processing
+3. Data Processing (static class (ex: Data.Max()))
     * Max/Min/ArgMax/ArgMin
     * Sum
     * Axis functionality
