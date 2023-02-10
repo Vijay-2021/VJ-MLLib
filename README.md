@@ -2,7 +2,7 @@
  * Vijay Shah, Jacob Stolker
 # Project Objectives
  * Use Keras for reference
-  - https://keras.io/api/
+    - https://keras.io/api/
 ## Linalg Library
 1. Matrix/Tensor class
     * reshape
