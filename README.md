@@ -4,18 +4,18 @@
  * Use Keras for reference
   - https://keras.io/api/
 ## Linalg Library
-* Matrix/Tensor class
-- reshape
-- broadcasting
-- matrix/tensor.zeros()
-- matrix/tensor.ones()
-* Operator overloads
- * scalar/vector addition/subtraction
- * scalar multiplication/division
- * dot product (inner product)
- * cross product (outer product)
- * matrix multiplication (elem-wise)
- * matrix multiplication (standard)
+1. Matrix/Tensor class
+* reshape
+* broadcasting
+* matrix/tensor.zeros()
+* matrix/tensor.ones()
+2. Operator overloads
+* scalar/vector addition/subtraction
+* scalar multiplication/division
+* dot product (inner product)
+* cross product (outer product)
+* matrix multiplication (elem-wise)
+* matrix multiplication (standard)
 
 
 
