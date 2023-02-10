@@ -1,21 +1,22 @@
 # VJ-MLLib
  * Vijay Shah, Jacob Stolker
 # Project Objectives
-
+ * Use Keras for reference
+  - https://keras.io/api/
 ## Linalg Library
- * Tensor class
- * Matrix class
+ * Matrix/Tensor class
+   - reshape
+   - broadcasting
+   - matrix/tensor.zeros()
+   - matrix/tensor.ones()
  * Operator overloads
    - scalar/vector addition/subtraction
    - scalar multiplication/division
    - dot product (inner product)
    - cross product (outer product)
- * Node functions 
-   - sigmoid
-   - relu
-   - softmax
-   - gradient
-   
+   - matrix multiplication (elem-wise)
+   - matrix multiplication (standard)
+
 
 
 ## Loss functions (loss class)
@@ -72,21 +73,43 @@
    - loss function
    - evaluate()
    - train()
+    - forward prop
+    - back prop
+   - optimize()
    - weights, biases
 
+
+ * Node Class
+   - abstract node
+   - transform (function)
+   - backprop(loss funct)
+   - type:
+    - sigmoid
+    - relu
+    - softmax
+    - gradient
+    - standard (no function applied)
+    - lambda
+ * Optimizers (static class)
+   - Adam
+   - RMSprop
+   - SGD
 
 
 ## Layers
  * Abstract layer class
-   - function (sigmoid, relu, softmax, etc)
+   - node array
    - in/out shape
+   - connection
  * input layer
+ * Activation layer
  * Conv2D layer
  * Dense layer
  * (Global)MaxPooling
  * (Global)AveragePooling
  * Dropout
  * Normalization
+ * Lambda layer (arbitrary function on an activation layer)
  
 
  
