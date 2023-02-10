@@ -10,21 +10,21 @@
    - matrix/tensor.zeros()
    - matrix/tensor.ones()
  * Operator overloads
-   - scalar/vector addition/subtraction
-   - scalar multiplication/division
-   - dot product (inner product)
-   - cross product (outer product)
-   - matrix multiplication (elem-wise)
-   - matrix multiplication (standard)
+   ** scalar/vector addition/subtraction
+   ** scalar multiplication/division
+   ** dot product (inner product)
+   ** cross product (outer product)
+   ** matrix multiplication (elem-wise)
+   ** matrix multiplication (standard)
 
 
 
 ## Loss functions (loss class)
  * mean_squared_error
-   - loss function
-   - backprop
+   ** loss function
+   ** backprop
  * mean_absolute_error
-    - loss function
+    ** loss function
     - backprop
  * mean_absolute_percentage_error
     - loss function
