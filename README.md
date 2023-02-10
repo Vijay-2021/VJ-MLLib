@@ -2,9 +2,10 @@
  * Vijay Shah, Jacob Stolker
 # Project Objectives
  * Use [Keras](https://keras.io/api/) for reference
+ * Use ~~strikethough~~ to cross off
 ## Linalg Library
 1. Matrix/Tensor class
-    * ~~reshape~~
+    * reshape
     * broadcasting
     * matrix/tensor.zeros()
     * matrix/tensor.ones()
