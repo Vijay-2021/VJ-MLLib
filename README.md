@@ -4,7 +4,7 @@
  * Use [Keras](https://keras.io/api/) for reference
 ## Linalg Library
 1. Matrix/Tensor class
-    * reshape
+    * ~~reshape~~
     * broadcasting
     * matrix/tensor.zeros()
     * matrix/tensor.ones()
