@@ -12,9 +12,9 @@ Matrix::Matrix() {
 /**
 * Initializes a matrix of zeros
 */
-Matrix::Matrix(int rows, int columns): rows_(rows), cols_(columns), elem_count_(rows*columns) {
+Matrix::Matrix(size_t rows, size_t columns): rows_(rows), cols_(columns), elem_count_(rows*columns) {
     data_ = new double[rows_ * cols_];
-    for (int i = 0; i < elem_count_; i++) {
+    for (size_t i = 0; i < elem_count_; i++) {
         data_[i] = 0;
     }
 }
@@ -23,12 +23,12 @@ Matrix::Matrix(int rows, int columns): rows_(rows), cols_(columns), elem_count_(
 * @param rows amount of rows in the new data array
 * @param cols amount of columns in the new data array 
 */
-Matrix::Matrix(double* new_data_array, int rows, int cols) {
+Matrix::Matrix(double* new_data_array, size_t rows, size_t cols) {
     rows_ = rows;
     cols_ = cols;
     elem_count_ = rows_ * cols_;
     data_ = new double[elemCount()];
-    for (int i = 0; i < elemCount(); i++) {
+    for (size_t i = 0; i < elemCount(); i++) {
         data_[i] = new_data_array[i];
     }
 }
@@ -41,7 +41,7 @@ Matrix::Matrix(const Matrix& rhs) {
     elem_count_ = rhs.elem_count_;
     if (elemCount() > 0) {
         data_ = new double[elemCount()];
-        for (int i = 0; i < elemCount(); i++) {
+        for (size_t i = 0; i < elemCount(); i++) {
             data_[i] = rhs.data_[i];
         }
     } else {
@@ -59,7 +59,7 @@ Matrix& Matrix::operator=(const Matrix& rhs) {
     elem_count_ = rhs.elem_count_;
     data_ = new double[elem_count_];
     if (rhs.elemCount() > 0) {
-        for (int i =0; i < elemCount(); i++) {
+        for (size_t i =0; i < elemCount(); i++) {
             data_[i] = rhs.data_[i];
         }
     } else {
@@ -81,18 +81,12 @@ void Matrix::deleteMatrix() {
 }
 
 void Matrix::printMatrix() {
-    //print out all the entries to confirm that data is being stored in memory correctly 
-    std::cout << "" << std::endl;// print out a new line to get some space between prints
-    std::cout << "entries: " << std::endl;
-    for (int i = 0; i < elemCount(); i++) {
-        std::cout << data_[i] << ",";
-    }
+    
 
     //print out in a more recognizable form
-    std::cout << "" << std::endl;
     std::cout << "matrix: " << std::endl;
-    for (int i = 0; i < height(); i++) {
-        for (int j = 0; j < width(); j++) {
+    for (size_t i = 0; i < height(); i++) {
+        for (size_t j = 0; j < width(); j++) {
             if (j == 0) {
                 std::cout << "[";
             }
@@ -103,66 +97,125 @@ void Matrix::printMatrix() {
             }
         }
     }
-    std::cout << "" << std::endl; // print a new line to put some space between matrix prints
+    std::cout << "" << std::endl; // prsize_t a new line to put some space between matrix prints
 }
 
 //getters
-double* Matrix::getRow(int row_idx) const {
-    double output[width()];
-    for (int i = 0; i < width(); i++) {
-        output[i] = data_[width()*row_idx + i];
+double* Matrix::getRow(size_t row_idx) const {
+    double* row = new double[width()];
+    for (size_t i = 0; i < width(); i++) {
+        row[i] = data_[width()*row_idx + i];
     }
+    return row;
 }
-double* Matrix::getCol(int col_idx) const {
-    double output[height()];
-    for (int i = 0; i < height(); i++) {
-        output[i] = data_[(width()*i) + col_idx];
+double* Matrix::getCol(size_t col_idx) const {
+    double* col = new double[height()];
+    for (size_t i = 0; i < height(); i++) {
+        col[i] = data_[(width()*i) + col_idx];
     }
+    return col;
 }
-double Matrix::getElement(int row_idx, int col_idx) const{
+double Matrix::getElement(size_t row_idx, size_t col_idx) const{
     if (row_idx > rows_ - 1 || col_idx > cols_ - 1 || row_idx < 0 || col_idx < 0) {
         throw std::invalid_argument("pass valid row and col index");
     }
     return data_[row_idx*width() + col_idx];
 }
-int Matrix::height() const {return rows_;}
-int Matrix::width() const {return cols_;}
-int Matrix::elemCount() const {return elem_count_;}
+size_t Matrix::height() const {return rows_;}
+size_t Matrix::width() const {return cols_;}
+size_t Matrix::elemCount() const {return elem_count_;}
 //setters
 
-void Matrix::setRow(const Matrix& row_vector, int row_idx) {
+void Matrix::setRow(const Matrix& row_vector, size_t row_idx) {
     if (row_vector.width() == width() && row_vector.height() == 1) {
 
     }
 }
-void Matrix::setCol(const Matrix& col_vector, int col_idx) {}
-void Matrix::setRow(double* row_vector, int row_idx) {}
-void Matrix::setCol(double* col_vector, int col_idx) {}
-void Matrix::setElement(double value, int row_idx, int col_idx) {
+void Matrix::setCol(const Matrix& col_vector, size_t col_idx) {}
+void Matrix::setRow(double* row_vector, size_t row_idx) {
+    for (size_t i = 0; i < width(); i++) {
+        data_[width()*row_idx + i] = row_vector[i];
+    }
+}
+void Matrix::setCol(double* col_vector, size_t col_idx) {
+    for (size_t i = 0; i < height(); i++) {
+        data_[(width()*i) + col_idx] = col_vector[i];
+    }
+}
+void Matrix::setElement(double value, size_t row_idx, size_t col_idx) {
     if (row_idx > rows_ - 1 || col_idx > cols_ - 1 || row_idx < 0 || col_idx < 0) {
         throw std::invalid_argument("pass valid row and col index");
     }
     data_[row_idx*width() + col_idx] = value;
 }
 
+// extras
+
+double Matrix::dotProd(double* vector_one, size_t vector_one_size, double* vector_two, size_t vector_two_size) {
+    if (vector_one_size != vector_two_size) {
+        throw std::invalid_argument("the vectors must have the same size");
+    }
+    double output = 0; 
+    for (size_t index = 0; index < vector_one_size; index++) {
+        output += vector_one[index]*vector_two[index];
+    } 
+    return output;
+}
+
+//Matrix Matrix Operations: 
+
+Matrix Matrix::matrixProd(const Matrix& other) {
+    if (other.rows_ != cols_) {
+        throw std::invalid_argument("the number of rows in the other matrix must equal the number of columns in the current matrix");
+    }
+    Matrix new_matrix(rows_, other.cols_);
+    for (size_t row = 0; row < rows_; row++) {
+        for (size_t col = 0; col < other.cols_; col++) {
+            double* matrix_row = getRow(row);
+            double* column = other.getCol(col);
+            double output = dotProd(matrix_row, cols_, column, other.rows_);
+            new_matrix.setElement(output, row, col);
+            delete[] matrix_row;
+            delete[] column;
+        }
+    }
+    return new_matrix;
+}
 
 //return the transpose of the current matrix
 Matrix Matrix::transposeM() {
-    return Matrix(rows_, cols_);
+    Matrix new_matrix(cols_, rows_);
+    for (size_t i = 0; i < cols_; i++) {
+        double* column = getCol(i);
+        new_matrix.setRow(column, i);
+        delete[] column;
+    }
+    return new_matrix;
 } 
 //transpose the current matrix
 void Matrix::transpose() {
-
+    Matrix temp = transposeM();
+    delete[] data_;
+    elem_count_ = temp.elem_count_;
+    data_ = new double[elem_count_];
+    if (temp.elemCount() > 0) {
+        for (size_t i =0; i < elemCount(); i++) {
+            data_[i] = temp.data_[i];
+        }
+    } else {
+        data_ = nullptr;
+    }
+    rows_ = temp.rows_;
+    cols_ = temp.cols_;
 } // transpose the current matrix
 //overloaded operators
-
 
 
 // matrix-matrix addition
 Matrix Matrix::operator+(const Matrix& rhs){
     double output[rows_*cols_];
-    for (int i = 0; i < rows_; i++) {
-        for (int j = 0; j < cols_; j++) {
+    for (size_t i = 0; i < rows_; i++) {
+        for (size_t j = 0; j < cols_; j++) {
             output[i*width() + j] = data_[i*width() + j] + rhs.data_[i*width() + j];
         }
     }
@@ -238,7 +291,7 @@ Matrix& Matrix::operator%=(const Matrix& rhs) {
 //vector operator%(const vector& c); do this later when we create the vector class 
 //vector& operator%=(const vector& c); do this later when we create the vector class 
 
-bool Matrix::checkShapesMatch(int lrows, int lcols, int rrows, int rcols) const{
+bool Matrix::checkShapesMatch(size_t lrows, size_t lcols, size_t rrows, size_t rcols) const{
     return (lcols == rcols && lrows == rrows);
 }
 
@@ -246,7 +299,7 @@ bool Matrix::operator==(const Matrix& rhs) const {
     if (!checkShapesMatch(rows_, cols_, rhs.rows_, rhs.cols_)) {
         return false;
     }
-    for (int i = 0; i < elemCount(); i++) {
+    for (size_t i = 0; i < elemCount(); i++) {
         if (rhs.data_[i] != data_[i]) {
             return false;
         }
@@ -256,4 +309,62 @@ bool Matrix::operator==(const Matrix& rhs) const {
 
 bool Matrix::operator!=(const Matrix& rhs) const {
     return !(*this == rhs);
+}
+
+
+void Matrix::addRow(double* new_row, size_t row_size, size_t row_idx) {
+    if (row_size != width()) {
+        throw std::invalid_argument("row size must match width");
+    }
+    double* new_data = new double[elem_count_ + row_size];
+    for (size_t i = 0; i < row_idx * width(); i++) {
+        new_data[i] = data_[i];
+    }
+    for (size_t i = (row_idx * width()); i < (row_idx + 1)*width(); i++) {
+        new_data[i] = new_row[i - (row_idx*width())];
+    }
+    for (size_t i = row_idx*width(); i < elem_count_; i++) {
+        new_data[i + width()] = data_[i];
+    }
+    delete[] data_;
+    data_ = new_data;
+    rows_ += 1;
+    elem_count_ += cols_;
+}
+void Matrix::addCol(double* new_col, size_t col_size, size_t col_idx) {
+    if (col_size != height()) {
+        throw std::invalid_argument("the column size must be equal to the height");
+    }
+    double* new_data = new double[elem_count_ + col_size];
+    for (size_t col = 0; col < cols_ + 1; col++) {
+        if (col < col_idx) {
+            for (size_t row = 0; row < rows_; row++) {
+                size_t idx1 = (width()*row) + col;
+                size_t idx2 = ((width() + 1)*row) + col;
+                new_data[idx2] = data_[idx1];
+            }
+        } else if (col == col_idx) {
+            for (size_t row = 0; row < rows_; row++) {
+                size_t idx = ((width() + 1)*row) + col;
+                new_data[idx] = new_col[row];
+            }
+        } else {
+            for (size_t row = 0; row < rows_; row++) {
+                size_t idx1 = (width()*row) + col - 1;
+                size_t idx2 = ((width() + 1)*row) + col;
+                new_data[idx2] = data_[idx1];
+            }  
+        }
+    }
+    delete[] data_;
+    data_ = new_data;
+    cols_ += 1; 
+    elem_count_ += rows_;
+}
+
+void Matrix::appendRow(double* new_row, size_t row_size) {
+    addRow(new_row, row_size, rows_);
+}
+void Matrix::appendCol(double* new_col, size_t col_size) {
+    addCol(new_col, col_size, cols_);
 }
