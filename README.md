@@ -22,18 +22,19 @@
     * broadcasting
     * matrix/tensor.zeros()
     * matrix/tensor.ones()
+    * matrix/tensor.identity()
 2. Operator overloads
-    * scalar/vector addition/subtraction
-    * scalar multiplication/division
-    * dot product (inner product)
+    *~~scalar/vector addition/subtraction~~ (completed for Matrix only so far)
+    * ~~scalar multiplication/division~~ (completed for Matrix only so far)
+    * ~~dot product (inner product)~~ 
     * cross product (outer product)
-    * matrix multiplication (elem-wise)
-    * matrix multiplication (standard)
+    * ~~matrix multiplication (elem-wise)~~ (completed for Matrix only so far)
+    * ~~matrix multiplication (standard)~~ (completed for Matrix only so far)
 3. Data Processing (static class (ex: Data.Max()))
     * Max/Min/ArgMax/ArgMin
     * Sum
     * Axis functionality
-    * Drop/Add
+    * ~~Drop/Add~~ (completed for Matrix only so far)
     * Where (for finding null, inf, 0)
 
 

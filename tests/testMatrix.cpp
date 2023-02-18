@@ -162,12 +162,12 @@ TEST_CASE("Test Operator Overloads", "[weight=1][part=1]") {
     double c_array_start[16] = {1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2};
     double d_array_start[16] = {-3, 5, 8, 4, 27, 3, 4, 5, 12, 32, -0.345, 2, 1, 32, 8, 14};
 
-    double output_eq_one[9] = {6, 9, 4, 19, 10, 29, 8, 39, 14};
+    double output_eq_one[9] = {6, 13, 8, 23, 10, 33, 12, 43, 14};
 
     Matrix A(a_array_start, 3, 3);
-    Matrix B(a_array_start, 3, 3);
+    Matrix B(b_array_start, 3, 3);
     Matrix C(3,3);
-    C = ((A*6.0 + B*2.0) / 2.0) + 4.0;
+    C = ((A*6.0 + B*2.0)/2.0) + 4.0;
     C.printMatrix();
     Matrix compare(output_eq_one, 3, 3);
     compare.printMatrix();
