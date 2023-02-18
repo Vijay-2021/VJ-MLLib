@@ -1,4 +1,4 @@
-#include "../includes/matrix.hpp"
+#include "../linalg/includes/matrix.hpp"
 #include <catch2/catch_test_macros.hpp>
 
 // part-1: Basic Matrix Functionality
@@ -150,6 +150,27 @@ TEST_CASE("Test Matrix Add Column", "[weight=1][part=1]") {
     REQUIRE(test4 == compare4);
     
 
-     
+}
+
+TEST_CASE("Test Operator Overloads", "[weight=1][part=1]") {
+    double constant_one = - 4;
+    double constant_two = 7;
+    double constant_three = 34.4958696;
+
+    double a_array_start[9] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    double b_array_start[9] = {-1, 3, -5, 7, -9, 11, -13, 15, -17};
+    double c_array_start[16] = {1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2};
+    double d_array_start[16] = {-3, 5, 8, 4, 27, 3, 4, 5, 12, 32, -0.345, 2, 1, 32, 8, 14};
+
+    double output_eq_one[9] = {6, 9, 4, 19, 10, 29, 8, 39, 14};
+
+    Matrix A(a_array_start, 3, 3);
+    Matrix B(a_array_start, 3, 3);
+    Matrix C(3,3);
+    C = ((A*6.0 + B*2.0) / 2.0) + 4.0;
+    C.printMatrix();
+    Matrix compare(output_eq_one, 3, 3);
+    compare.printMatrix();
+    REQUIRE(C == compare);
 }
 
