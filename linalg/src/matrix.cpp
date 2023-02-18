@@ -1,4 +1,4 @@
-#include "matrix.hpp"
+#include "../includes/matrix.hpp"
 
 //Constructors: 
 
@@ -116,7 +116,7 @@ double* Matrix::getCol(size_t col_idx) const {
     return col;
 }
 double Matrix::getElement(size_t row_idx, size_t col_idx) const{
-    if (row_idx > rows_ - 1 || col_idx > cols_ - 1 || row_idx < 0 || col_idx < 0) {
+    if (row_idx > rows_ - 1 || col_idx > cols_ - 1) {
         throw std::invalid_argument("pass valid row and col index");
     }
     return data_[row_idx*width() + col_idx];
@@ -143,7 +143,7 @@ void Matrix::setCol(double* col_vector, size_t col_idx) {
     }
 }
 void Matrix::setElement(double value, size_t row_idx, size_t col_idx) {
-    if (row_idx > rows_ - 1 || col_idx > cols_ - 1 || row_idx < 0 || col_idx < 0) {
+    if (row_idx > rows_ - 1 || col_idx > cols_ - 1) {
         throw std::invalid_argument("pass valid row and col index");
     }
     data_[row_idx*width() + col_idx] = value;
@@ -213,78 +213,185 @@ void Matrix::transpose() {
 
 // matrix-matrix addition
 Matrix Matrix::operator+(const Matrix& rhs){
-    double output[rows_*cols_];
+    double* output = new double[rows_*cols_];
     for (size_t i = 0; i < rows_; i++) {
         for (size_t j = 0; j < cols_; j++) {
             output[i*width() + j] = data_[i*width() + j] + rhs.data_[i*width() + j];
         }
     }
-    return Matrix(output, rows_, cols_);
+    Matrix out(output, rows_, cols_);
+    delete[] output; 
+    return out;
 }
 Matrix& Matrix::operator+=(const Matrix& rhs){
+    for (size_t i = 0; i < rows_; i++) {
+        for (size_t j = 0; j < cols_; j ++) {
+            data_[i*width() + j] += rhs.data_[i*width() + j];
+        }
+    }
     return *this;
 }
 // matrix-constant addition
 Matrix Matrix::operator+(const double c){
-     return Matrix(rows_, cols_);
+    double* output = new double[rows_*cols_];
+    for (size_t i = 0; i < rows_; i++) {
+        for (size_t j = 0; j < cols_; j++) {
+            output[i*width() + j] = data_[i*width() + j] + c;
+        }
+    }
+     return Matrix(output, rows_, cols_);
 }
 Matrix& Matrix::operator+=(const double c){
+    for (size_t i = 0; i < rows_; i++) {
+        for (size_t j = 0; j < cols_; j ++) {
+            data_[i*width() + j] += c;
+        }
+    }
     return *this;
 }
 
 
 // matrix-matrix subtraction
 Matrix Matrix::operator-(const Matrix& rhs){
-     return Matrix(rows_, cols_);
+    double* output = new double[rows_*cols_];
+    for (size_t i = 0; i < rows_; i++) {
+        for (size_t j = 0; j < cols_; j++) {
+            output[i*width() + j] = data_[i*width() + j] - rhs.data_[i*width() + j];
+        }
+    }
+    return Matrix(output, rows_, cols_);
 }
 Matrix& Matrix::operator-=(const Matrix& rhs){
+    for (size_t i = 0; i < rows_; i++) {
+        for (size_t j = 0; j < cols_; j ++) {
+            data_[i*width() + j] -= rhs.data_[i*width() + j];
+        }
+    }
     return *this;
 }
 // matrix-constant subtraction
 Matrix Matrix::operator-(const double c){
-     return Matrix(rows_, cols_);
+    double* output = new double[rows_*cols_];
+    for (size_t i = 0; i < rows_; i++) {
+        for (size_t j = 0; j < cols_; j++) {
+            output[i*width() + j] = data_[i*width() + j] - c;
+        }
+    }
+    Matrix out(output, rows_, cols_);
+    delete[] output; 
+    return out;
 }
 Matrix& Matrix::operator-=(const double c){
+    for (size_t i = 0; i < rows_; i++) {
+        for (size_t j = 0; j < cols_; j ++) {
+            data_[i*width() + j] -= c;
+        }
+    }
     return *this;
 }
 
 
 // matrix element-wise multiplication
 Matrix Matrix::operator*(const Matrix& rhs) {
-     return Matrix(rows_, cols_);
+    double* output = new double[rows_*cols_];
+    for (size_t i = 0; i < rows_; i++) {
+        for (size_t j = 0; j < cols_; j++) {
+            output[i*width() + j] = data_[i*width() + j] * rhs.data_[i*width() + j];
+        }
+    }
+    Matrix out(output, rows_, cols_);
+    delete[] output; 
+    return out;
 }
 Matrix& Matrix::operator*=(const Matrix& rhs) {
+    for (size_t i = 0; i < rows_; i++) {
+        for (size_t j = 0; j < cols_; j ++) {
+            data_[i*width() + j] *= rhs.data_[i*width() + j];
+        }
+    }
     return *this;
 }
 // constant-matrix multiplication
 Matrix Matrix::operator*(const double c) {
-     return Matrix(rows_, cols_);
+    double* output = new double[rows_*cols_];
+    for (size_t i = 0; i < rows_; i++) {
+        for (size_t j = 0; j < cols_; j++) {
+            output[i*width() + j] = data_[i*width() + j] * c;
+        }
+    }
+    Matrix out(output, rows_, cols_);
+    delete[] output; 
+    return out;
 }
 Matrix& Matrix::operator*=(const double c) {
+    for (size_t i = 0; i < rows_; i++) {
+        for (size_t j = 0; j < cols_; j ++) {
+            data_[i*width() + j] *= c;
+        }
+    }
     return *this;
 }
 
 
 // matrix element-wise division
 Matrix Matrix::operator/(const Matrix& rhs) {
-     return Matrix(rows_, cols_);
+    double* output = new double[rows_*cols_];
+    for (size_t i = 0; i < rows_; i++) {
+        for (size_t j = 0; j < cols_; j++) {
+            output[i*width() + j] = data_[i*width() + j] / rhs.data_[i*width() + j];
+        }
+    }
+    Matrix out(output, rows_, cols_);
+    delete[] output; 
+    return out;
 }
 Matrix& Matrix::operator/=(const Matrix& rhs) {
+    for (size_t i = 0; i < rows_; i++) {
+        for (size_t j = 0; j < cols_; j ++) {
+            data_[i*width() + j] /= rhs.data_[i*width() + j];
+        }
+    }
     return *this;
 }
 // constant-matrix division
 Matrix Matrix::operator/(const double c) {
-     return Matrix(rows_, cols_);
+    double* output = new double[rows_*cols_];
+    for (size_t i = 0; i < rows_; i++) {
+        for (size_t j = 0; j < cols_; j++) {
+            output[i*width() + j] = data_[i*width() + j] / c;
+        }
+    }
+    Matrix out(output, rows_, cols_);
+    delete[] output; 
+    return out;
 }
 Matrix& Matrix::operator/=(const double c) {
+    for (size_t i = 0; i < rows_; i++) {
+        for (size_t j = 0; j < cols_; j ++) {
+            data_[i*width() + j] /= c;
+        }
+    }
     return *this;
 }
 
 // typical matrix multiplication
 Matrix Matrix::operator%(const Matrix& rhs) {
-     return Matrix(rows_, cols_);
+    return matrixProd(rhs);
 }
 Matrix& Matrix::operator%=(const Matrix& rhs) {
+    Matrix output = matrixProd(rhs);
+    delete[] data_;
+    rows_ = output.rows_;
+    cols_ = output.cols_;
+    elem_count_ = output.elem_count_;
+    if (elemCount() > 0) {
+        data_ = new double[elemCount()];
+        for (size_t i = 0; i < elemCount(); i++) {
+            data_[i] = output.data_[i];
+        }
+    } else {
+        data_ = nullptr; // define an empty matrix as nullptr with rows and cols = 0
+    }
     return *this;
 }
 // typical matrix-vector multiplication

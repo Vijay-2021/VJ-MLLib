@@ -1,4 +1,4 @@
-#include "matrix.hpp"
+#include "../linalg/includes/matrix.hpp"
 #include <iostream>
 
 int main() {
