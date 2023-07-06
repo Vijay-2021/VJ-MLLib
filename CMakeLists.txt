@@ -25,18 +25,19 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(Catch2)
 
 add_subdirectory(${PROJECT_SOURCE_DIR}/linalg)
+add_subdirectory(${PROJECT_SOURCE_DIR}/MLBase)
 
 add_executable(tests ../tests/testMatrix.cpp)
 list(APPEND CMAKE_MODULE_PATH ${catch2_SOURCE_DIR}/extras)
 
 
 target_include_directories(tests
-    PUBLIC ${PROJECT_SOURCE_DIR}/linalg
+    PUBLIC ${PROJECT_SOURCE_DIR}/linalg ${PROJECT_SOURCE_DIR}/MLBase
 )
 
 target_include_directories(main
-    PUBLIC ${PROJECT_SOURCE_DIR}/linalg
+    PUBLIC ${PROJECT_SOURCE_DIR}/linalg ${PROJECT_SOURCE_DIR}/MLBase
 )
-target_link_libraries(tests PRIVATE Catch2::Catch2WithMain linalg)
-target_link_libraries(main PRIVATE linalg)
+target_link_libraries(tests PRIVATE Catch2::Catch2WithMain linalg mlbase)
+target_link_libraries(main PRIVATE linalg mlbase)
 

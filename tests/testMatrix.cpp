@@ -3,7 +3,7 @@
 
 // part-1: Basic Matrix Functionality
 
-TEST_CASE("Test Prsize_t Matrix", "[weight=1][part=1]") {
+TEST_CASE("Test Print Matrix", "[weight=1][part=1]") {
     Matrix m(2,2);
     m.printMatrix();
 }
@@ -31,8 +31,6 @@ TEST_CASE("Test Set Element", "[weight=1][part=1]") {
     m.setElement(3, 0, 0);
     Matrix m2(4, 4);
     m2.setElement(3, 3, 2);
-    m.printMatrix();
-    m2.printMatrix();
     REQUIRE(m.getElement(0,0) == 3);
     REQUIRE(m2.getElement(3, 2) == 3);
 
@@ -64,7 +62,6 @@ TEST_CASE("Test Constructor", "[weight=1][part=1]") {
     REQUIRE(m3 == compare);
     REQUIRE_FALSE(m4 == compare);
     REQUIRE_FALSE(m5 == compare);
-    compare.printMatrix();
 }
 
 TEST_CASE("Test Matrix Product", "[weight=1][part=1]") {
@@ -85,10 +82,6 @@ TEST_CASE("Test Matrix Product", "[weight=1][part=1]") {
     
     Matrix output = m.matrixProd(m2);
     
-    m.printMatrix();
-    m2.printMatrix();
-    output.printMatrix();
-    compare.printMatrix();
 
     REQUIRE(output == compare);
 
@@ -107,7 +100,6 @@ TEST_CASE("Test Matrix Transpose", "[weight=1][part=1]") {
     Matrix compare2(data4, 4, 3);
 
     Matrix transpose1 = test1.transposeM();
-    transpose1.printMatrix();
     test2.transpose();
 
     REQUIRE(transpose1 == compare1);
@@ -141,8 +133,6 @@ TEST_CASE("Test Matrix Add Column", "[weight=1][part=1]") {
     test2.appendRow(append2, 4);
     test3.addCol(append1, 3, 1);
     test4.addRow(append2, 4, 1);
-    test4.printMatrix();
-    compare4.printMatrix();
 
     REQUIRE(test1 == compare1);
     REQUIRE(test2 == compare2);
@@ -168,9 +158,39 @@ TEST_CASE("Test Operator Overloads", "[weight=1][part=1]") {
     Matrix B(b_array_start, 3, 3);
     Matrix C(3,3);
     C = ((A*6.0 + B*2.0)/2.0) + 4.0;
-    C.printMatrix();
     Matrix compare(output_eq_one, 3, 3);
-    compare.printMatrix();
     REQUIRE(C == compare);
 }
 
+TEST_CASE("Test Zeros and Ones") {
+    double zerosThreeByThree[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+    double onesThreeByThree[9] = {1, 1, 1, 1, 1, 1, 1, 1, 1};
+    double zerosMixed[12] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    double onesMixed[12] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+    double zerosVector[3] = {0, 0, 0};
+    double onesVector[3] = {1, 1, 1};
+
+    Matrix zeroMatThreeByThree = Matrix::zeros(3, 3);
+    Matrix oneMatThreeByThree = Matrix::ones(3, 3);
+    Matrix zerosMatMixed = Matrix::zeros(6, 2);
+    Matrix onesMatMixed = Matrix::ones(6, 2);
+    Matrix zerosMatVector = Matrix::zeros(3, 1);
+    Matrix onesMatVector = Matrix::ones(3, 1);
+
+    
+    Matrix zeroMatCompareThreeThree(zerosThreeByThree, 3, 3);
+    Matrix oneMatCompareThreeThree(onesThreeByThree, 3, 3);
+    Matrix zeroMatCompareMixed(zerosMixed, 6, 2);
+    Matrix oneMatCompareMixed(onesMixed, 6, 2);
+    Matrix zeroMatCompareVector(zerosVector, 3, 1);
+    Matrix oneMatCompareVector(onesVector, 3, 1);
+
+    REQUIRE(zeroMatCompareThreeThree == zeroMatThreeByThree);
+    REQUIRE(oneMatCompareThreeThree == oneMatThreeByThree);
+    REQUIRE(zeroMatCompareMixed == zerosMatMixed);
+    REQUIRE(oneMatCompareMixed == onesMatMixed);
+    REQUIRE(zeroMatCompareVector == zerosMatVector);
+    REQUIRE(oneMatCompareVector == onesMatVector);
+
+
+}

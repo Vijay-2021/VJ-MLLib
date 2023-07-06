@@ -1,5 +1,24 @@
 #include "../includes/matrix.hpp"
 
+// Static functions: 
+
+Matrix Matrix::zeros(size_t rows, size_t columns) {
+    double* data = new double[rows * columns];
+    for (size_t i = 0; i < rows * columns; i++) {
+        data[i] = 0;
+    }
+    return Matrix(data, rows, columns);
+}
+
+Matrix Matrix::ones(size_t rows, size_t columns) {
+    double* data = new double[rows * columns];
+    for (size_t i = 0; i < rows * columns; i++) {
+        data[i] = 1;
+    }
+    return Matrix(data, rows, columns);
+}
+
+
 //Constructors: 
 
 Matrix::Matrix() {
@@ -80,6 +99,9 @@ void Matrix::deleteMatrix() {
     cols_ = 0; 
 }
 
+
+
+
 void Matrix::printMatrix() {
     
 
@@ -151,7 +173,7 @@ void Matrix::setElement(double value, size_t row_idx, size_t col_idx) {
 
 // extras
 
-double Matrix::dotProd(double* vector_one, size_t vector_one_size, double* vector_two, size_t vector_two_size) {
+double Matrix::dotProd(double* vector_one, size_t vector_one_size, double* vector_two, size_t vector_two_size) const{
     if (vector_one_size != vector_two_size) {
         throw std::invalid_argument("the vectors must have the same size");
     }
@@ -164,7 +186,7 @@ double Matrix::dotProd(double* vector_one, size_t vector_one_size, double* vecto
 
 //Matrix Matrix Operations: 
 
-Matrix Matrix::matrixProd(const Matrix& other) {
+Matrix Matrix::matrixProd(const Matrix& other) const{
     if (other.rows_ != cols_) {
         throw std::invalid_argument("the number of rows in the other matrix must equal the number of columns in the current matrix");
     }
@@ -212,7 +234,7 @@ void Matrix::transpose() {
 
 
 // matrix-matrix addition
-Matrix Matrix::operator+(const Matrix& rhs){
+Matrix Matrix::operator+(const Matrix& rhs) const{
     double* output = new double[rows_*cols_];
     for (size_t i = 0; i < rows_; i++) {
         for (size_t j = 0; j < cols_; j++) {
@@ -223,7 +245,7 @@ Matrix Matrix::operator+(const Matrix& rhs){
     delete[] output; 
     return out;
 }
-Matrix& Matrix::operator+=(const Matrix& rhs){
+Matrix& Matrix::operator+=(const Matrix& rhs) {
     for (size_t i = 0; i < rows_; i++) {
         for (size_t j = 0; j < cols_; j ++) {
             data_[i*width() + j] += rhs.data_[i*width() + j];
@@ -232,7 +254,7 @@ Matrix& Matrix::operator+=(const Matrix& rhs){
     return *this;
 }
 // matrix-constant addition
-Matrix Matrix::operator+(const double c){
+Matrix Matrix::operator+(const double c) const{
     double* output = new double[rows_*cols_];
     for (size_t i = 0; i < rows_; i++) {
         for (size_t j = 0; j < cols_; j++) {
@@ -241,7 +263,7 @@ Matrix Matrix::operator+(const double c){
     }
      return Matrix(output, rows_, cols_);
 }
-Matrix& Matrix::operator+=(const double c){
+Matrix& Matrix::operator+=(const double c) {
     for (size_t i = 0; i < rows_; i++) {
         for (size_t j = 0; j < cols_; j ++) {
             data_[i*width() + j] += c;
@@ -252,7 +274,7 @@ Matrix& Matrix::operator+=(const double c){
 
 
 // matrix-matrix subtraction
-Matrix Matrix::operator-(const Matrix& rhs){
+Matrix Matrix::operator-(const Matrix& rhs) const{
     double* output = new double[rows_*cols_];
     for (size_t i = 0; i < rows_; i++) {
         for (size_t j = 0; j < cols_; j++) {
@@ -261,7 +283,7 @@ Matrix Matrix::operator-(const Matrix& rhs){
     }
     return Matrix(output, rows_, cols_);
 }
-Matrix& Matrix::operator-=(const Matrix& rhs){
+Matrix& Matrix::operator-=(const Matrix& rhs) {
     for (size_t i = 0; i < rows_; i++) {
         for (size_t j = 0; j < cols_; j ++) {
             data_[i*width() + j] -= rhs.data_[i*width() + j];
@@ -270,7 +292,7 @@ Matrix& Matrix::operator-=(const Matrix& rhs){
     return *this;
 }
 // matrix-constant subtraction
-Matrix Matrix::operator-(const double c){
+Matrix Matrix::operator-(const double c) const{
     double* output = new double[rows_*cols_];
     for (size_t i = 0; i < rows_; i++) {
         for (size_t j = 0; j < cols_; j++) {
@@ -281,7 +303,7 @@ Matrix Matrix::operator-(const double c){
     delete[] output; 
     return out;
 }
-Matrix& Matrix::operator-=(const double c){
+Matrix& Matrix::operator-=(const double c) {
     for (size_t i = 0; i < rows_; i++) {
         for (size_t j = 0; j < cols_; j ++) {
             data_[i*width() + j] -= c;
@@ -292,7 +314,7 @@ Matrix& Matrix::operator-=(const double c){
 
 
 // matrix element-wise multiplication
-Matrix Matrix::operator*(const Matrix& rhs) {
+Matrix Matrix::operator*(const Matrix& rhs) const{
     double* output = new double[rows_*cols_];
     for (size_t i = 0; i < rows_; i++) {
         for (size_t j = 0; j < cols_; j++) {
@@ -312,7 +334,7 @@ Matrix& Matrix::operator*=(const Matrix& rhs) {
     return *this;
 }
 // constant-matrix multiplication
-Matrix Matrix::operator*(const double c) {
+Matrix Matrix::operator*(const double c) const{
     double* output = new double[rows_*cols_];
     for (size_t i = 0; i < rows_; i++) {
         for (size_t j = 0; j < cols_; j++) {
@@ -334,7 +356,7 @@ Matrix& Matrix::operator*=(const double c) {
 
 
 // matrix element-wise division
-Matrix Matrix::operator/(const Matrix& rhs) {
+Matrix Matrix::operator/(const Matrix& rhs) const{
     double* output = new double[rows_*cols_];
     for (size_t i = 0; i < rows_; i++) {
         for (size_t j = 0; j < cols_; j++) {
@@ -354,7 +376,7 @@ Matrix& Matrix::operator/=(const Matrix& rhs) {
     return *this;
 }
 // constant-matrix division
-Matrix Matrix::operator/(const double c) {
+Matrix Matrix::operator/(const double c) const{
     double* output = new double[rows_*cols_];
     for (size_t i = 0; i < rows_; i++) {
         for (size_t j = 0; j < cols_; j++) {
@@ -375,7 +397,7 @@ Matrix& Matrix::operator/=(const double c) {
 }
 
 // typical matrix multiplication
-Matrix Matrix::operator%(const Matrix& rhs) {
+Matrix Matrix::operator%(const Matrix& rhs) const{
     return matrixProd(rhs);
 }
 Matrix& Matrix::operator%=(const Matrix& rhs) {
@@ -474,4 +496,14 @@ void Matrix::appendRow(double* new_row, size_t row_size) {
 }
 void Matrix::appendCol(double* new_col, size_t col_size) {
     addCol(new_col, col_size, cols_);
+}
+
+double Matrix::sum() const{
+    double sum = 0;
+    for (size_t i = 0; i < rows_; i++) {
+        for (size_t j = 0; j < cols_; j++) {
+            sum += data_[i * width() + j];
+        }
+    }
+    return sum;
 }

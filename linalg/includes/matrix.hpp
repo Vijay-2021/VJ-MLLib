@@ -12,6 +12,8 @@ class Matrix {
         Matrix(size_t rows, size_t columns);
         Matrix(const Matrix& rhs);
         Matrix(double* new_data_array, size_t rows, size_t cols);
+        static Matrix zeros(size_t rows, size_t columns);
+        static Matrix ones(size_t rows, size_t columns);
         ~Matrix();
 
         void printMatrix();
@@ -32,46 +34,46 @@ class Matrix {
         void setRow(double* row_vector, size_t row_idx);
         void setCol(double* col_vector, size_t col_idx);
         void setElement(double value, size_t row_idx, size_t col_idx);
-        Matrix matrixProd(const Matrix& other);
-        double dotProd(double* vector_one, size_t vector_one_size, double* vector_two, size_t vector_two_size);
+        Matrix matrixProd(const Matrix& other) const;
+        double dotProd(double* vector_one, size_t vector_one_size, double* vector_two, size_t vector_two_size) const;
 
         Matrix transposeM(); // return a copy of the transpose of the matrix
         void transpose(); // transpose the current matrix
         //overloaded operators
         
         // matrix-matrix subtraction
-        Matrix operator+(const Matrix& rhs);
+        Matrix operator+(const Matrix& rhs) const;
         Matrix& operator+=(const Matrix& rhs);
         // matrix-constant subtraction
-        Matrix operator+(const double c);
+        Matrix operator+(const double c) const;
         Matrix& operator+=(const double c);
         // matrix-matrix subtraction
-        Matrix operator-(const Matrix& rhs);
+        Matrix operator-(const Matrix& rhs) const;
         Matrix& operator-=(const Matrix& rhs);
         // matrix-constant subtraction
-        Matrix operator-(const double c);
+        Matrix operator-(const double c) const;
         Matrix& operator-=(const double c);
         // matrix element-wise multiplication
-        Matrix operator*(const Matrix& rhs);
+        Matrix operator*(const Matrix& rhs) const;
         Matrix& operator*=(const Matrix& rhs);
         // constant-matrix multiplication
-        Matrix operator*(const double c);
+        Matrix operator*(const double c) const;
         Matrix& operator*=(const double c);
         // matrix element-wise division
-        Matrix operator/(const Matrix& rhs);
+        Matrix operator/(const Matrix& rhs) const;
         Matrix& operator/=(const Matrix& rhs);
         // constant-matrix division
-        Matrix operator/(const double c);
+        Matrix operator/(const double c) const;
         Matrix& operator/=(const double c);
         // typical matrix multiplication
-        Matrix operator%(const Matrix& rhs);
+        Matrix operator%(const Matrix& rhs) const;
         Matrix& operator%=(const Matrix& rhs);
         // typical matrix-vector multiplication
         // vector operator%(const vector& c); do this later when we create the vector class 
         // vector& operator%=(const vector& c); do this later when we create the vector class 
 
         // deep copy
-        Matrix& operator=(const Matrix& rhs);
+        Matrix& operator=(const Matrix& rhs) ;
         bool operator==(const Matrix& rhs) const;
         bool operator!=(const Matrix& rhs) const;
         
@@ -84,6 +86,7 @@ class Matrix {
         void appendRow(double* new_row, size_t row_size);
         void appendCol(double* new_col, size_t col_size);
         
+        double sum() const;
     private: 
         //private functions
 
