@@ -9,5 +9,6 @@
 using namespace std;
 
 class Losses {
-    static double MeanSquaredError(const Matrix& y, const Matrix& y_hat); 
+    public: 
+        static double MeanSquaredError(const Matrix& y, const Matrix& y_hat); 
 };

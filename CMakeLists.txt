@@ -27,7 +27,9 @@ FetchContent_MakeAvailable(Catch2)
 add_subdirectory(${PROJECT_SOURCE_DIR}/linalg)
 add_subdirectory(${PROJECT_SOURCE_DIR}/MLBase)
 
-add_executable(tests ../tests/testMatrix.cpp)
+file(GLOB_RECURSE tests_source ${CMAKE_SOURCE_DIR}/tests/*.cpp)
+
+add_executable(tests ${tests_source})
 list(APPEND CMAKE_MODULE_PATH ${catch2_SOURCE_DIR}/extras)
 
 
