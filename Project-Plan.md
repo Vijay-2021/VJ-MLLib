@@ -35,3 +35,10 @@ ConvNets:
 Other features: 
 
 Optimization: 
+
+Style: 
+
+- Functions should be written with speed in mind
+- Functions should be named in camel case with the first letter lower case 
+- Variable names should be in snake case 
+- Member variables should be in snake case and have an underscore at the end. 

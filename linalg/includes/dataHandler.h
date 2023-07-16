@@ -1,5 +1,5 @@
 #pragma once
-#include "matrix.hpp"
+#include "matrix.h"
 #include "utils.h"
 #include <fstream>
 

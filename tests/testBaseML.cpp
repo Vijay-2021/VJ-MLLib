@@ -1,4 +1,4 @@
-#include "../linalg/includes/matrix.hpp"
+#include "../linalg/includes/matrix.h"
 #include "../MLBase/includes/losses.h"
 #include <catch2/catch_test_macros.hpp>
 

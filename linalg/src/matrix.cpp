@@ -1,4 +1,4 @@
-#include "../includes/matrix.hpp"
+#include "../includes/matrix.h"
 
 // Static functions: 
 
