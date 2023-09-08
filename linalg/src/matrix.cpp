@@ -537,13 +537,9 @@ bool Matrix::approxEquals(double precision, const Matrix& rhs) {
         return false;
     }
     double precision_constant = std::pow(10, -precision);
-    std::cout << "precision constant for " << precision << " is: " << precision_constant << std::endl;
     for (size_t i = 0; i < elemCount(); i++) {
         double difference = std::abs(rhs.data_[i] - data_[i]);
         if (difference > precision_constant) { // we do greater than so a precision of zero just tests for equality
-            std::cout << "rhs data: " << rhs.data_[i] << " lhs data: " << data_[i] <<  " difference: " << std::abs(rhs.data_[i] - data_[i]) <<  " precision constant: " << precision_constant << std::endl;
-            std::cout << difference - precision_constant << std::endl;
-            std::cout << difference << std::endl;
             return false;
         }
     }
