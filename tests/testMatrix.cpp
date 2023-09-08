@@ -194,3 +194,26 @@ TEST_CASE("Test Zeros and Ones") {
 
 
 }
+
+
+TEST_CASE("Test approx equals") {
+    Matrix onesMat = Matrix::ones(3, 1);
+    double test_mat_one[3] = {0.99, 0.99, 0.99};
+    double test_mat_two[3] = {0.999, 0.999, 0.999};
+    double test_mat_three[3] = {0.9, 0.99, 0.99};
+    double test_mat_four[3] = {0.991, 0.992, 0.989};
+
+    Matrix testOne(test_mat_one, 3, 1);
+    Matrix testTwo(test_mat_two, 3, 1);
+    Matrix testThree(test_mat_three, 3, 1); 
+    Matrix testFour(test_mat_four, 3, 1);
+
+    REQUIRE(onesMat.approxEquals(1, testOne) == true);
+    REQUIRE(onesMat.approxEquals(2, testOne) == true);
+    REQUIRE(onesMat.approxEquals(3, testOne) == false);
+    REQUIRE(onesMat.approxEquals(3, testTwo) == true);
+    REQUIRE(onesMat.approxEquals(4, testTwo) == false);
+    REQUIRE(onesMat.approxEquals(2, testThree) == false);
+    REQUIRE(onesMat.approxEquals(2, testFour) == false);
+    REQUIRE(onesMat.approxEquals(1, testFour) == true);
+}

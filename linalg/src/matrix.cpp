@@ -416,6 +416,29 @@ Matrix& Matrix::operator%=(const Matrix& rhs) {
     }
     return *this;
 }
+
+Matrix Matrix::operator^(const Matrix& rhs) const {
+    double* output = new double[rows_*cols_];
+    for (size_t i = 0; i < rows_; i++) {
+        for (size_t j = 0; j < cols_; j++) {
+            output[i*width() + j] = std::pow(data_[i*width() + j], rhs.data_[i*width() + j]);
+        }
+    }
+    Matrix out(output, rows_, cols_);
+    delete[] output; 
+    return out;
+}
+
+Matrix& Matrix::operator^=(const Matrix& rhs) {
+
+    for (size_t i = 0; i < rows_; i++) {
+        for (size_t j = 0; j < cols_; j++) {
+            data_[i*width() + j] = std::pow(data_[i*width() + j], rhs.data_[i*width() + j]);
+        }
+    }
+    return *this;
+}
+
 // typical matrix-vector multiplication
 //vector operator%(const vector& c); do this later when we create the vector class 
 //vector& operator%=(const vector& c); do this later when we create the vector class 
@@ -439,6 +462,7 @@ bool Matrix::operator==(const Matrix& rhs) const {
 bool Matrix::operator!=(const Matrix& rhs) const {
     return !(*this == rhs);
 }
+
 
 
 void Matrix::addRow(double* new_row, size_t row_size, size_t row_idx) {
@@ -506,4 +530,22 @@ double Matrix::sum() const{
         }
     }
     return sum;
+}
+
+bool Matrix::approxEquals(double precision, const Matrix& rhs) {
+    if (!checkShapesMatch(rows_, cols_, rhs.rows_, rhs.cols_)) {
+        return false;
+    }
+    double precision_constant = std::pow(10, -precision);
+    std::cout << "precision constant for " << precision << " is: " << precision_constant << std::endl;
+    for (size_t i = 0; i < elemCount(); i++) {
+        double difference = std::abs(rhs.data_[i] - data_[i]);
+        if (difference > precision_constant) { // we do greater than so a precision of zero just tests for equality
+            std::cout << "rhs data: " << rhs.data_[i] << " lhs data: " << data_[i] <<  " difference: " << std::abs(rhs.data_[i] - data_[i]) <<  " precision constant: " << precision_constant << std::endl;
+            std::cout << difference - precision_constant << std::endl;
+            std::cout << difference << std::endl;
+            return false;
+        }
+    }
+    return true;
 }

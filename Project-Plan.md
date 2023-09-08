@@ -42,3 +42,17 @@ Style:
 - Functions should be named in camel case with the first letter lower case 
 - Variable names should be in snake case 
 - Member variables should be in snake case and have an underscore at the end. 
+
+
+Ideal model functionality: 
+
+- Model(input_size, output_size, [optimizer, scheduler, etc]) 
+- Model.add_layer(output_size, activation), the input size should be remembered 
+- Model.add_layer....
+- Model.compute_loss()
+- Model.forward()
+- Model.backward() should implicitly compute the loss and perform backprop      
+
+Ideal Layer functionality: 
+
+-Takes in an input matrix(or tensor) and outputs an output matrix(or tensor)

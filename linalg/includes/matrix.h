@@ -5,6 +5,8 @@
 #include <cstddef> 
 #include <stdexcept>
 #include <string>
+#include <cmath> 
+
 using namespace std;
 class Matrix { 
     public:
@@ -14,6 +16,8 @@ class Matrix {
         Matrix(double* new_data_array, size_t rows, size_t cols);
         static Matrix zeros(size_t rows, size_t columns);
         static Matrix ones(size_t rows, size_t columns);
+        static Matrix random(size_t rows, size_t columns);
+        
         ~Matrix();
 
         void printMatrix();
@@ -77,7 +81,9 @@ class Matrix {
         bool operator==(const Matrix& rhs) const;
         bool operator!=(const Matrix& rhs) const;
         
-
+        Matrix operator^(const Matrix& rhs) const;
+        Matrix& operator^=(const Matrix& rhs);
+        
         //utility functions: 
 
         void addRow(double* new_row, size_t row_size, size_t row_idx);
@@ -87,6 +93,8 @@ class Matrix {
         void appendCol(double* new_col, size_t col_size);
         
         double sum() const;
+        bool approxEquals(double precision, const Matrix& rhs);
+
     private: 
         //private functions
 
