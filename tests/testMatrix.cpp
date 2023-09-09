@@ -3,17 +3,19 @@
 
 // part-1: Basic Matrix Functionality
 
+//test with visual inspection
 TEST_CASE("Test Print Matrix", "[weight=1][part=1]") {
     Matrix m(2,2);
     Matrix m2(2,3);
     Matrix m3(1,1);
     Matrix m4(4,1);
     Matrix m5(7, 3);
+
     m.printMatrix();
     m2.printMatrix();
     m3.printMatrix();
     m4.printMatrix();
-    m5.printMatrix();
+    m5.printMatrix(); 
 }
 
 TEST_CASE("Test Get Element", "[weight=1][part=1]") {

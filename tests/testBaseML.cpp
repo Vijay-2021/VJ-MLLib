@@ -39,6 +39,23 @@ TEST_CASE("Test Basic Sigmoid Activation", "[weight=1][part=1]") {
     Sigmoid activ;
     Matrix forward_calculated_matrix = activ.computeActivation(forward_input);
     REQUIRE(forward_calculated_matrix.approxEquals(5,forward_expected_matrix));
+}
 
-
+TEST_CASE("Test Basic Sigmoid Backprop") {
+    double backward_data[6] = {1, 0, -3, 40000, -40000, 0.0534};
+    Matrix backward_input(backward_data, 3, 2);
+    double expected_output[6] = {0.196612, 0.25, 0.045177, 0, 0, 0.249822};
+    Matrix backward_expected(expected_output, 3, 2);
+    Sigmoid activ;
+    Matrix backward_calc_in = activ.computeGradient(backward_input);
+    REQUIRE(backward_calc_in.approxEquals(5, backward_expected));
+}
+TEST_CASE("Test Basic ReLU Backprop") {
+    double backward_data[6] = {1.992, 0, -1020, -0.000023, 0.00000001, 400000};
+    Matrix backward_input(backward_data, 3, 2);
+    double expected_output[6] = {1, 0, 0, 0, 1, 1};
+    Matrix backward_expected(expected_output, 3, 2);
+    ReLU activ;
+    Matrix backward_calc_in = activ.computeGradient(backward_input);
+    REQUIRE(backward_calc_in.approxEquals(5, backward_expected));
 }
